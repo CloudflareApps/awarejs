@@ -2,6 +2,10 @@
   "resources": {
     "body": [
       {
+        "type": "style",
+        "src": "./install/style.css"
+      },
+      {
         "type": "script",
         "src": "./aware.js",
         "moduleType": "global",
