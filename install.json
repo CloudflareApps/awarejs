@@ -6,7 +6,7 @@
         "src": "./aware.js",
         "moduleType": "global",
         "exports": [
-          "jQuery"
+          "reader"
         ],
         "depends": {
           "github.com/jquery/jquery:jquery.js": "jQuery"
@@ -14,7 +14,11 @@
       },
       {
         "type": "script",
-        "src": "./install/helper.js"
+        "src": "./install/helper.js",
+        "moduleType": "global",
+        "depends": {
+          "./aware.js": "reader"
+        }
       },
       {
         "type": "script",
