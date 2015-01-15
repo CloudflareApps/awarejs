@@ -1,9 +1,7 @@
-(function(){
-  var options = INSTALL_OPTIONS;
-
+window.EagerAwareHelper = function(options){
   var element = Eager.createElement(options.location);
 
-  if (reader[options.when]){
+  if (element && reader[options.when]){
     element.innerHTML = options.message;
   }
-})()
+}

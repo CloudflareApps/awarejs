@@ -14,11 +14,11 @@
       },
       {
         "type": "script",
-        "src": "./install/helper.js",
-        "moduleType": "global",
-        "depends": {
-          "./aware.js": "_"
-        }
+        "src": "./install/helper.js"
+      },
+      {
+        "type": "script",
+        "contents": "EagerAwareHelper(INSTALL_OPTIONS)"
       }
     ]
   },
@@ -31,20 +31,27 @@
         "format": "element",
         "title": "Location",
         "type": "object",
-        "description": "Where would you like the message to appear?"
+        "description": "Where would you like the message to appear?",
+        "order": 0
       },
       "when": {
         "title": "When To Show",
         "description": "To what visitors should this message be shown?",
         "type": "string",
         "enum": ["firstVisit", "repeatVisitor", "firstVisitOfDay"],
-        "enumNames": ["Users who are visiting my site for the first time", "Visitors who have been to my site at least once before", "Users who have visited my site before, but this is their first visit today"]
+        "enumNames": {
+          "firstVisit": "Users who are visiting my site for the first time",
+          "repeatVisitor": "Visitors who have been to my site at least once before",
+          "firstVisitOfDay": "Users who have visited my site before, but this is their first visit today"
+        },
+        "order": 1
       },
       "message": {
-        "title": "message",
+        "title": "Message",
         "description": "The content of the message you would like to show to these visitors",
         "type": "string",
-        "format": "textarea"
+        "format": "textarea",
+        "order": 2
       }
     }
   }
