@@ -1,10 +1,10 @@
 		(function($) {
-		
+
 			/*
-			
-				A Javascript library to help create dynamic 
+
+				A Javascript library to help create dynamic
 				reader-aware interfaces to content.
-							
+
 				by Ben Brown ben@xoxco.com
 			*/
 
@@ -16,16 +16,16 @@
 				var onejan = new Date(this.getFullYear(),0,1);
 				return Math.ceil((this - onejan) / 86400000);
 			}
-			
+
 			function setLastVisit(date) {
-				if (window.localStorage) {					
+				if (window.localStorage) {
 					window.localStorage.setItem('lastVisit',date);
 				} else {
 					document.cookie = 'lastVisit=' + escape(date) + "; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/";
 				}
 			}
-			
-	
+
+
 			function getLastVisit() {
 				if (window.localStorage) {
 					return window.localStorage.getItem('lastVisit');
@@ -34,7 +34,7 @@
 					return !isNaN(new Date(maybeLastVisit)) ? maybeLastVisit : null;
 				}
 			}
-			
+
 			function pluralizeString(num,str) {
 				if (num==1) {
 					return str;
@@ -42,14 +42,14 @@
 					return str+'s';
 				}
 			}
-						
+
 			function relativeTimestamp(ms) {
 				var seconds = Math.floor(ms / 1000);
 
 				if (seconds < 60) {
 					return seconds + pluralizeString(seconds,' second');
 				}
-				
+
 				var minutes = Math.floor(seconds/60);
 				if (minutes < 60) {
 					return minutes + pluralizeString(minutes,' minute');
@@ -67,10 +67,10 @@
 
 				var weeks = Math.floor(days/7);
 				return weeks + pluralizeString(weeks,' week');
-				
+
 			}
-			
-			
+
+
 			// insert a bookmark with a relative timestamp after the last new item on the page.
 			$.fn.shkmark = function(options) {
 				var settings = {
@@ -78,40 +78,40 @@
 					'element': 'li',
 					'newIndicator':'.new'
 				}
-				
+
 				$.extend(settings,options);
 
 				if (!$(this).length || !$(this).filter(settings.newIndicator).length) {
 					return;
 				}
-								
+
 				if (!lastVisit) {
 					lastVisit = getLastVisit();
 				}
 				if (!lastVisit) { return; }
 				lastVisit = new Date(lastVisit);
 				var now = new Date();
-				
+
 				var message = 'You started reading here ' + relativeTimestamp(now-lastVisit) + ' ago';
-				
+
 				var bookmark = document.createElement(settings.element);
 				$(bookmark).addClass(settings.className);
 				$(bookmark).html(message);
-				
+
 
 				if($(this).last()[0]!=$(this).filter(settings.newIndicator)[0]) {
 					$(this).filter(settings.newIndicator).last().after(bookmark);
 				}
-				
-				
+
+
 			}
-		
+
 			$.fn.time_of_day = function(time_of_day) {
-				// What time of day is it? 
+				// What time of day is it?
 				// Is it sunny or dark?
 				// Is it lunch time? Or late night?
-				/* 
-				
+				/*
+
 					4-7 early morning
 					7-11 morning / breakfast time
 					11-13 noonish / lunch time
@@ -120,11 +120,11 @@
 					19-21 evening / dinner time
 					21-23 night
 					23-4 latenight
-					
+
 					7-19 daytime
 					19-7 nighttime
-								
-				*/				
+
+				*/
 				reader.morning = reader.afternoon = reader.lunchtime = reader.daytime = reader.nighttime = false;
 				if (time_of_day >= 4 && time_of_day < 6) {
 					reader.time_of_day = 'early';
@@ -151,7 +151,7 @@
 				} else if (time_of_day >= 23 || time_of_day < 4) {
 					reader.time_of_day = 'latenight';
 				}
-				
+
 				if (time_of_day >= 6 && time_of_day <19) {
 					reader.daytime = true;
 					$('body').addClass('daytime');
@@ -167,24 +167,24 @@
 				if (reader.afternoon) {
 					$('body').addClass('afternoon');
 				}
-				
-				$('body').addClass(reader.time_of_day);				
-				
+
+				$('body').addClass(reader.time_of_day);
+
 			}
-			
+
 			$.fn.aware = function(options) {
-				
+
 				var settings = {
 					dateAttribute: 'data-pubDate',
 					bufferTime: 60*60*1000 // by default, leave things new if they are an hour old or less
 
-				}				
+				}
 
 				var reader = {};
 
-				
+
 				$.extend(settings,options);
-				
+
 				// retrieve user's last visit timestamp
 				// but make sure not to override it if already set once this session!
 				if (!lastVisit) {
@@ -207,7 +207,7 @@
 						$('body').addClass('repeat-visitor');
 						reader.firstVisitOfDay = true;
 						reader.repeatVisitor = true;
-	
+
 					} else {
 						if (!$('body').hasClass('first-visit')) {
 							$('body').addClass('repeat-visitor');
@@ -215,7 +215,7 @@
 						}
 					}
 				}
-								
+
 				if (!reader.firstVisit) {
 					this.each(function() {
 						// find the date element
@@ -228,12 +228,12 @@
 							} else {
 								$(this).addClass('seen');
 							}
-	
+
 						}
-						
+
 					});
 				}
-				
+
 
 				reader.secondsSinceLastVisit = Math.floor((now-lastVisit)/1000);
 				reader.timeSinceLastVisit = relativeTimestamp(now-lastVisit);
@@ -242,8 +242,10 @@
 
 				$.fn.time_of_day(new Date().getHours());
 
-				
+
 				setLastVisit(now);
-			}			
-		
+			}
+
+			$().aware();
+
 		})(jQuery);
