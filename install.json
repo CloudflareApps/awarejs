@@ -23,7 +23,7 @@
     ]
   },
   "dependencies": {
-    "github.com/jquery/jquery": ">= 1.7.0, < 2.0.0"
+    "github.com/jquery/jquery": ">= 1.7.0, <= 1.10.2"
   },
   "options": {
     "properties": {
