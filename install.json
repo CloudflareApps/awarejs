@@ -1,0 +1,51 @@
+{
+  "resources": {
+    "body": [
+      {
+        "type": "script",
+        "src": "./aware.js",
+        "moduleType": "global",
+        "exports": [
+          "jQuery"
+        ],
+        "depends": {
+          "github.com/jquery/jquery:jquery.js": "jQuery"
+        }
+      },
+      {
+        "type": "script",
+        "src": "./install/helper.js",
+        "moduleType": "global",
+        "depends": {
+          "./aware.js": "_"
+        }
+      }
+    ]
+  },
+  "dependencies": {
+    "github.com/jquery/jquery": ">= 1.7.0, < 2.0.0"
+  },
+  "options": {
+    "properties": {
+      "location": {
+        "format": "element",
+        "title": "Location",
+        "type": "object",
+        "description": "Where would you like the message to appear?"
+      },
+      "when": {
+        "title": "When To Show",
+        "description": "To what visitors should this message be shown?",
+        "type": "string",
+        "enum": ["firstVisit", "repeatVisitor", "firstVisitOfDay"],
+        "enumNames": ["Users who are visiting my site for the first time", "Visitors who have been to my site at least once before", "Users who have visited my site before, but this is their first visit today"]
+      },
+      "message": {
+        "title": "message",
+        "description": "The content of the message you would like to show to these visitors",
+        "type": "string",
+        "format": "textarea"
+      }
+    }
+  }
+}
