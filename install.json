@@ -51,9 +51,10 @@
       "message": {
         "order": 2,
         "title": "What should the message say?",
+        "description": "HTML is supported",
         "type": "string",
         "format": "textarea",
-        "default": "Welcome to __CompanyName__! If you have any questions or just want to say hello, send us a line at __EmailAddress__."
+        "default": "Welcome to our site! As a first-time visitor you are eligible for a special promotion. Use code FIRST20 at checkout for 20% off your entire order!"
       },
       "style": {
         "type": "object",
