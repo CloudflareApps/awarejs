@@ -35,31 +35,74 @@
   },
   "options": {
     "properties": {
-      "location": {
-        "format": "element",
-        "title": "Location",
-        "type": "object",
-        "description": "Where would you like the message to appear?",
-        "order": 0
-      },
       "when": {
-        "title": "When To Show",
-        "description": "To what visitors should this message be shown?",
+        "order": 1,
+        "title": "Who should see the message?",
         "type": "string",
+        "format": "radios",
         "enum": ["firstVisit", "repeatVisitor", "firstVisitOfDay"],
         "enumNames": {
-          "firstVisit": "Users who are visiting my site for the first time",
-          "repeatVisitor": "Visitors who have been to my site at least once before",
-          "firstVisitOfDay": "Users who have visited my site before, but this is their first visit today"
+          "firstVisit": "First-time visitors<span class=\"help-text\">Users who are visiting my site for the first time</span>",
+          "repeatVisitor": "Repeat-visitors<span class=\"help-text\">Users who have been to my site at least once before</span>",
+          "firstVisitOfDay": "First return today<span class=\"help-text\">Users who have visited my site before, but this is their first visit today</span>"
         },
-        "order": 1
+        "default": "firstVisit"
       },
       "message": {
-        "title": "Message",
-        "description": "The content of the message you would like to show to these visitors",
+        "order": 2,
+        "title": "What should the message say?",
         "type": "string",
         "format": "textarea",
-        "order": 2
+        "default": "Welcome to __CompanyName__! If you have any questions or just want to say hello, send us a line at __EmailAddress__."
+      },
+      "style": {
+        "type": "object",
+        "title": "How should the message be styled?",
+        "order": 3,
+        "properties": {
+          "color": {
+            "order": 1,
+            "title": "Text color",
+            "type": "string",
+            "format": "color",
+            "default": "#303786"
+          },
+          "backgroundColor": {
+            "order": 2,
+            "title": "Background color",
+            "type": "string",
+            "format": "color",
+            "default": "#ddedff"
+          },
+          "fontSize": {
+            "order": 3,
+            "title": "Text size",
+            "type": "string",
+            "enum": [
+              ".75em",
+              "1em",
+              "1.5em",
+              "2.5em"
+            ],
+            "enumNames": {
+              ".75em": "Small",
+              "1em": "Normal",
+              "1.5em": "Large",
+              "2.5em": "Huge"
+            },
+            "default": "1em"
+          }
+        }
+      },
+      "location": {
+        "order": 4,
+        "title": "Where would you like the message to appear?",
+        "type": "object",
+        "format": "element",
+        "default": {
+          "element": "body",
+          "method": "prepend"
+        }
       }
     }
   }
