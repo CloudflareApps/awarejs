@@ -43,7 +43,7 @@
         "enum": ["firstVisit", "repeatVisitor", "firstVisitOfDay"],
         "enumNames": {
           "firstVisit": "First-time visitors<span class=\"help-text\">Users who are visiting my site for the first time</span>",
-          "repeatVisitor": "Repeat-visitors<span class=\"help-text\">Users who have been to my site at least once before</span>",
+          "repeatVisitor": "Repeat visitors<span class=\"help-text\">Users who have been to my site at least once before</span>",
           "firstVisitOfDay": "First return today<span class=\"help-text\">Users who have visited my site before, but this is their first visit today</span>"
         },
         "default": "firstVisit"
